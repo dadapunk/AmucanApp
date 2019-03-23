@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: io.github.rockerhieu:emojicon:1.4.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/emojicon-1.4.0.aar/f5ce61fc98a0909b82bc3f7f210a8985/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/emojicon-1.4.0.aar/f5ce61fc98a0909b82bc3f7f210a8985/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.rockerhieu/emojicon/1.4.0/2627c417456e6a225b110a534b37c65fac730b3d/emojicon-1.4.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
