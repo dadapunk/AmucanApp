@@ -94,7 +94,7 @@ Original code
     <string name="house_number">House number</string>
     <string name="postcode">Postcode</string>
     <string name="get_involved">Get involved</string>
-    <string name="get_involved_link" translatable="false">www.github.com/AmucanApp</string>
+    <string name="get_involved_link" translatable="false">www.github.com/dadapunk/AmucanApp</string>
     <string name="credits">Credits</string>
     <string name="credits_link" translatable="false">www.Amucanapp.co/credits/</string>
     <string name="open_source_culture">Amucan app was initiated in Santiago Chile with a lot of ♥\n for free and open source culture.</string>
