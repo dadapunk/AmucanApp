@@ -55,7 +55,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void dismissSplash() {
-        startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+        startActivity(new Intent(SplashScreenActivity.this, MapActivity.class));
         finish();
     }
 

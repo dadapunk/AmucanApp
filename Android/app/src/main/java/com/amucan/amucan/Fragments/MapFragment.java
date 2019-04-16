@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.amucan.amucan.Activities.MainActivity;
+import com.amucan.amucan.Activities.MapActivity;
 import com.amucan.amucan.Models.DeviceLocationData;
 import com.amucan.amucan.Models.ParcelablePOI;
 import com.amucan.amucan.R;
@@ -99,14 +99,14 @@ public class MapFragment extends Fragment implements MapEventsReceiver {
         mapSetup();
         viewSetup();
 
-        if (map != null && (existingRoute = ((MainActivity) getActivity()).getMapRoute()) != null && ((MainActivity) getActivity()).getRouteMarker() != null) {
+        if (map != null && (existingRoute = ((MapActivity) getActivity()).getMapRoute()) != null && ((MapActivity) getActivity()).getRouteMarker() != null) {
             //load routes if any previously exit
             map.getOverlays().add(existingRoute);
-            Marker marker = ((MainActivity) getActivity()).getRouteMarker();
+            Marker marker = ((MapActivity) getActivity()).getRouteMarker();
             routeDestinationMarker = MapUtils.addMarker(getActivity(), map, marker.getPosition().getLatitude(), marker.getPosition().getLongitude());
             map.invalidate();
 
-            ((MainActivity) getActivity()).toggleFabPoiDetailsAfterRoute();
+            ((MapActivity) getActivity()).toggleFabPoiDetailsAfterRoute();
             //restart the route redraw timer if there is a route to some destination
             overrideRouteOnLocationChange();
         }
@@ -129,8 +129,8 @@ public class MapFragment extends Fragment implements MapEventsReceiver {
             public void onClick(View view) {
                 if (createPoiMarker != null) {
                     //check authentication before creating
-                    if (!((MainActivity) getActivity()).checkAuthentication()) return;
-                    ((MainActivity) getActivity()).hideNavigation();
+                    if (!((MapActivity) getActivity()).checkAuthentication()) return;
+                    ((MapActivity) getActivity()).hideNavigation();
 
                     //hide crete poi data
                     try {
@@ -193,8 +193,8 @@ public class MapFragment extends Fragment implements MapEventsReceiver {
         //clear routeDestinationMarker
         if (routeDestinationMarker != null)
             map.getOverlays().remove(routeDestinationMarker);
-        //clear data from MainActivity
-        ((MainActivity) getActivity()).clearRoute();
+        //clear data from MapActivity
+        ((MapActivity) getActivity()).clearRoute();
     }
     /*********************************************************************************************/
 
@@ -202,7 +202,7 @@ public class MapFragment extends Fragment implements MapEventsReceiver {
      * Show location marker for user
      */
     public void setupMyLocation() {
-        DeviceLocationData location = ((MainActivity) getActivity()).getLastKnownLocation();
+        DeviceLocationData location = ((MapActivity) getActivity()).getLastKnownLocation();
         if (location != null && map != null) {
             if (locationMarker == null) {
                 locationMarker = MapUtils.myLocation(getActivity(), map, location.getLatitude(), location.getLongitude());
@@ -233,8 +233,8 @@ public class MapFragment extends Fragment implements MapEventsReceiver {
 
         //kill the reroute timer
         killRouteTimer();
-        //clear data from MainActivity
-        ((MainActivity) getActivity()).clearRoute();
+        //clear data from MapActivity
+        ((MapActivity) getActivity()).clearRoute();
         //clear existing routes form map and destination markers
         if (routeDestinationMarker != null)
             map.getOverlays().remove(routeDestinationMarker);
@@ -260,11 +260,11 @@ public class MapFragment extends Fragment implements MapEventsReceiver {
             map.getOverlays().remove(routeDestinationMarker);
         if (existingRoute != null)
             map.getOverlays().remove(existingRoute);
-        //clear data from MainActivity
-        ((MainActivity) getActivity()).clearRoute();
+        //clear data from MapActivity
+        ((MapActivity) getActivity()).clearRoute();
 
 
-        DeviceLocationData location = ((MainActivity) getActivity()).getLastKnownLocation();
+        DeviceLocationData location = ((MapActivity) getActivity()).getLastKnownLocation();
         if (location != null) {
             createRoute(poi, location.getLatitude(), location.getLongitude(), poi.getLatitude(), poi.getLongitude());
         }
@@ -290,7 +290,7 @@ public class MapFragment extends Fragment implements MapEventsReceiver {
                 //add destination marker if
                 routeDestinationMarker = MapUtils.addMarker(getActivity(), map, toLatitude, toLongitude);
                 if (getActivity() != null)
-                    ((MainActivity) getActivity()).routeAddedOnMap(routeDestinationMarker, existingRoute);
+                    ((MapActivity) getActivity()).routeAddedOnMap(routeDestinationMarker, existingRoute);
 
                 //start task to redraw the route ever 30 seconds, if no previous timer is set ont this route
                 if (routeUpdateTimer == null)
@@ -316,7 +316,7 @@ public class MapFragment extends Fragment implements MapEventsReceiver {
                     map.getOverlays().remove(routeDestinationMarker);
                 //add destination marker if
                 routeDestinationMarker = MapUtils.addMarker(getActivity(), map, toLatitude, toLongitude);
-                ((MainActivity) getActivity()).routeAddedOnMap(poi, routeDestinationMarker, existingRoute);
+                ((MapActivity) getActivity()).routeAddedOnMap(poi, routeDestinationMarker, existingRoute);
 
                 //start task to redraw the route ever 30 seconds, if no previous timer is set ont this route
                 if (routeUpdateTimer == null)
@@ -343,11 +343,11 @@ public class MapFragment extends Fragment implements MapEventsReceiver {
                     //clear existing Route
                     if (existingRoute != null && map != null)
                         map.getOverlays().remove(existingRoute);
-                    //clear data from MainActivity
-                    ((MainActivity) getActivity()).clearRoutePolyline();
+                    //clear data from MapActivity
+                    ((MapActivity) getActivity()).clearRoutePolyline();
 
-                    Marker destinationMarker = ((MainActivity) getActivity()).getRouteMarker();
-                    DeviceLocationData location = ((MainActivity) getActivity()).getLastKnownLocation();
+                    Marker destinationMarker = ((MapActivity) getActivity()).getRouteMarker();
+                    DeviceLocationData location = ((MapActivity) getActivity()).getLastKnownLocation();
                     if (location != null && destinationMarker != null)
                         createRoute(location.getLatitude(), location.getLongitude(), destinationMarker.getPosition().getLatitude(), destinationMarker.getPosition().getLongitude());
 
@@ -368,7 +368,7 @@ public class MapFragment extends Fragment implements MapEventsReceiver {
 
     /**************************Reverse Geocoding methods, get POI info on map click****************************************/
     private void getPoiAtLocation(double lat, double lon) {
-        new ReverseGeocodingTask(getActivity(), lat, lon, ((MainActivity) getActivity()).getOsm(), new ParcelablePoiResponseListener() {
+        new ReverseGeocodingTask(getActivity(), lat, lon, ((MapActivity) getActivity()).getOsm(), new ParcelablePoiResponseListener() {
             @Override
             public void onPoiReceived(ParcelablePOI poi) {
                 openDetailedInfo(poi);
@@ -411,7 +411,7 @@ public class MapFragment extends Fragment implements MapEventsReceiver {
     @Override
     public boolean longPressHelper(GeoPoint p) {
         disableCreatePoi();//disable poi creation if it is enabled
-        DeviceLocationData location = ((MainActivity) getActivity()).getLastKnownLocation();
+        DeviceLocationData location = ((MapActivity) getActivity()).getLastKnownLocation();
         if (location != null) {
             //clear existingRoute
             if (existingRoute != null) {
@@ -421,8 +421,8 @@ public class MapFragment extends Fragment implements MapEventsReceiver {
             //clear routeDestinationMarker
             if (routeDestinationMarker != null)
                 map.getOverlays().remove(routeDestinationMarker);
-            //clear data from MainActivity
-            ((MainActivity) getActivity()).clearRoute();
+            //clear data from MapActivity
+            ((MapActivity) getActivity()).clearRoute();
 
             createRoute(location.getLatitude(), location.getLongitude(), p.getLatitude(), p.getLongitude());
         }

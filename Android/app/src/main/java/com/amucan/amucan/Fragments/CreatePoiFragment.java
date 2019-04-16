@@ -22,9 +22,9 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.amucan.amucan.Activities.MapActivity;
 import com.amucan.amucan.Fragments.PoiFeature.FeatureSelectedCallback;
 import com.amucan.amucan.Fragments.PoiFeature.PoiFeatureDialogFragment;
-import com.amucan.amucan.Activities.MainActivity;
 import com.amucan.amucan.Models.OsmFeature;
 import com.amucan.amucan.Network.ChangesetCallback;
 import com.amucan.amucan.Network.CreateChangesetTask;
@@ -129,7 +129,7 @@ public class CreatePoiFragment extends Fragment implements TimeCallback, Feature
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //get OSM credentials data
-        osm = ((MainActivity) getActivity()).getOsm();
+        osm = ((MapActivity) getActivity()).getOsm();
 
         mapSetup();
         setupView();
@@ -441,7 +441,7 @@ public class CreatePoiFragment extends Fragment implements TimeCallback, Feature
 
 
     private void closeFragment() {
-        ((MainActivity) getActivity()).showNavigationNoFab();
+        ((MapActivity) getActivity()).showNavigationNoFab();
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
@@ -583,7 +583,7 @@ public class CreatePoiFragment extends Fragment implements TimeCallback, Feature
         if (openChangesetId != null)
             publishNode(openChangesetId);//a changeset is currently opened
         else
-            new CreateChangesetTask(getActivity(), ((MainActivity) getActivity()).getOsm(), createChangesetEditTags(), new ChangesetCallback() {
+            new CreateChangesetTask(getActivity(), ((MapActivity) getActivity()).getOsm(), createChangesetEditTags(), new ChangesetCallback() {
                 @Override
                 public void onChangesetCreated(String changesetId) {
                     openChangesetId = changesetId;
@@ -596,7 +596,7 @@ public class CreatePoiFragment extends Fragment implements TimeCallback, Feature
                         new AppToast(getActivity()).centerViewToast((getString(R.string.no_internet_to_update_poi)));
                     else if (errorMessage.equals("Couldn't authenticate you")) {
                         new AppToast(getActivity()).centerViewToast((getString(R.string.session_expired_toast)));
-                        ((MainActivity) getActivity()).recheckAuthentication();
+                        ((MapActivity) getActivity()).recheckAuthentication();
                     }
                 }
             }).execute();

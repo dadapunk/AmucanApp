@@ -25,7 +25,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.amucan.amucan.Activities.MainActivity;
+import com.amucan.amucan.Activities.MapActivity;
 import com.amucan.amucan.Models.ParcelablePOI;
 import com.amucan.amucan.Network.ChangesetCallback;
 import com.amucan.amucan.Network.CreateChangesetTask;
@@ -146,7 +146,7 @@ public class EditPoiFragment extends Fragment implements TimeCallback {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //get OSM credentials data
-        osm = ((MainActivity) getActivity()).getOsm();
+        osm = ((MapActivity) getActivity()).getOsm();
 
         showLoadingScreen();
         mapSetup();
@@ -179,7 +179,7 @@ public class EditPoiFragment extends Fragment implements TimeCallback {
         //if MapFragment is open close any routing
         MapFragment MapFragment = (MapFragment) getActivity().getSupportFragmentManager().findFragmentByTag("MapFragment");
         if (MapFragment != null) {
-            ((MainActivity) getActivity()).showNavigation();
+            ((MapActivity) getActivity()).showNavigation();
         }
     }
 
@@ -552,7 +552,7 @@ public class EditPoiFragment extends Fragment implements TimeCallback {
         if (openChangesetId != null)
             submitEdits(openChangesetId);//a changeset is currently opened
         else
-            new CreateChangesetTask(getActivity(), ((MainActivity) getActivity()).getOsm(), createChangesetEditTags(), new ChangesetCallback() {
+            new CreateChangesetTask(getActivity(), ((MapActivity) getActivity()).getOsm(), createChangesetEditTags(), new ChangesetCallback() {
                 @Override
                 public void onChangesetCreated(String changesetId) {
                     openChangesetId = changesetId;
@@ -565,7 +565,7 @@ public class EditPoiFragment extends Fragment implements TimeCallback {
                         new AppToast(getActivity()).centerViewToast((getString(R.string.no_internet_to_update_poi)));
                     else if (errorMessage.equals("Couldn't authenticate you")) {
                         new AppToast(getActivity()).centerViewToast((getString(R.string.session_expired_toast)));
-                        ((MainActivity) getActivity()).recheckAuthentication();
+                        ((MapActivity) getActivity()).recheckAuthentication();
                     }
                 }
             }).execute();
@@ -880,7 +880,7 @@ public class EditPoiFragment extends Fragment implements TimeCallback {
     }
 
     private void closeFragment() {
-        ((MainActivity) getActivity()).showNavigationNoFab();
+        ((MapActivity) getActivity()).showNavigationNoFab();
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()

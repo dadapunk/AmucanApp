@@ -16,7 +16,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.amucan.amucan.Activities.MainActivity;
+import com.amucan.amucan.Activities.MapActivity;
 import com.amucan.amucan.Models.ParcelablePOI;
 import com.amucan.amucan.R;
 import com.amucan.amucan.Utils.MapUtils.MapUtils;
@@ -138,7 +138,7 @@ public class PoiDetailsFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 if (POI != null)
-                    ((MainActivity) getActivity()).showDirectionsToPoi(POI);
+                    ((MapActivity) getActivity()).showDirectionsToPoi(POI);
                 //Close this fragment
                 getActivity()
                         .getSupportFragmentManager()
@@ -151,7 +151,7 @@ public class PoiDetailsFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 if (POI != null) {
-                    ((MainActivity) getActivity()).editPoi(POI);
+                    ((MapActivity) getActivity()).editPoi(POI);
                     //Close this fragment
                     getActivity()
                             .getSupportFragmentManager()
@@ -206,7 +206,7 @@ public class PoiDetailsFragment extends DialogFragment {
 
     private void updateFavoriteButton() {
         //refresh favorites fragment if it is visible
-        ((MainActivity) getActivity()).refreshAppNavigation();
+        ((MapActivity) getActivity()).refreshAppNavigation();
         //favorite button setup
         if (storageUtil.isFavorite(POI))
             favoriteImageButton.setImageResource(R.drawable.ic_favorite_poi_true);

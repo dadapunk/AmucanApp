@@ -21,7 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.amucan.amucan.Adapters.ElementListAdapter;
-import com.amucan.amucan.Activities.MainActivity;
+import com.amucan.amucan.Activities.MapActivity;
 import com.amucan.amucan.Models.DeviceLocationData;
 import com.amucan.amucan.Models.ParcelablePOI;
 import com.amucan.amucan.R;
@@ -86,13 +86,13 @@ public class PoiListFragment extends Fragment {
             color = getArguments().getInt("color");
         }
 
-        //get form MainActivity
-        poiElements = ((MainActivity) getActivity()).getPoiElementsOfCategory();
+        //get form MapActivity
+        poiElements = ((MapActivity) getActivity()).getPoiElementsOfCategory();
         //sort by closest to location
         if (poiElements != null) {
             List<Element> sortedElements = sortByClosestToLocation(
                     new ArrayList<>(poiElements),
-                    ((MainActivity) getActivity()).getLastKnownLocation());
+                    ((MapActivity) getActivity()).getLastKnownLocation());
             poiElements = new ArrayList<>(sortedElements);
             adapterElements = new ArrayList<>(poiElements);
         }
@@ -101,7 +101,7 @@ public class PoiListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ((MainActivity) getActivity()).hideLoadingScreen();
+        ((MapActivity) getActivity()).hideLoadingScreen();
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_poi_list, container, false);
@@ -206,7 +206,7 @@ public class PoiListFragment extends Fragment {
         {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).showNavigationNoFab();
+                ((MapActivity) getActivity()).showNavigationNoFab();
                 getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
@@ -247,7 +247,7 @@ public class PoiListFragment extends Fragment {
                  */
                 List<Element> sortedByLocation = sortByClosestToLocation(
                         new ArrayList<>(adapterElements),
-                        ((MainActivity) getActivity()).getLastKnownLocation());
+                        ((MapActivity) getActivity()).getLastKnownLocation());
                 adapterElements.clear();
                 adapterElements = new ArrayList<>(sortedByLocation);
             }
@@ -498,7 +498,7 @@ public class PoiListFragment extends Fragment {
      * Show location marker for user
      */
     private void setupMyLocation() {
-        DeviceLocationData location = ((MainActivity) getActivity()).getLastKnownLocation();
+        DeviceLocationData location = ((MapActivity) getActivity()).getLastKnownLocation();
         if (location != null) {
             MapUtils.myLocation(getActivity(), map, location.getLatitude(), location.getLongitude());
             //center to my location

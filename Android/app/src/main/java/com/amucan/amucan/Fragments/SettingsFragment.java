@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.amucan.amucan.Activities.MainActivity;
+import com.amucan.amucan.Activities.MapActivity;
 import com.amucan.amucan.R;
 
 public class SettingsFragment extends Fragment {
@@ -49,9 +49,9 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (userName == null)
-                    ((MainActivity) getActivity()).loginToOSM();
+                    ((MapActivity) getActivity()).loginToOSM();
                 else
-                    ((MainActivity) getActivity()).logoutFromOSM();
+                    ((MapActivity) getActivity()).logoutFromOSM();
             }
         });
         loadUsername();
@@ -59,7 +59,7 @@ public class SettingsFragment extends Fragment {
 
 
     public void loadUsername() {
-        ((MainActivity) getActivity()).logUserInfo(new getUserInfo() {
+        ((MapActivity) getActivity()).logUserInfo(new getUserInfo() {
             @Override
             public void onResponse(final String displayName) {
                 userName = displayName;

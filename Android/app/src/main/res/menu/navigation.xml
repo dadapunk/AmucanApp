@@ -19,6 +19,12 @@
         android:id="@+id/navigation_favorites"
         android:icon="@drawable/ic_favorite_black_24dp"
         android:title="@string/nav_favorites" />
+
+    <!--<item-->
+        <!--android:id="@+id/navigation_user_settings"-->
+        <!--android:icon="@drawable/ic_user_settings"-->
+        <!--android:title="@string/nav_user_settings" />-->
+
     <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_information_outline"

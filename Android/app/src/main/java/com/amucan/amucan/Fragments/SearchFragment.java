@@ -19,7 +19,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.amucan.amucan.Activities.MainActivity;
+import com.amucan.amucan.Activities.MapActivity;
 import com.amucan.amucan.Adapters.PlaceListAdapter;
 import com.amucan.amucan.ApplicationConstants;
 import com.amucan.amucan.Models.DeviceLocationData;
@@ -296,7 +296,7 @@ public class SearchFragment extends Fragment {
      * @param searchString Name of the place to be searched
      */
     private void search(String searchString) {
-        final DeviceLocationData deviceLocationData = ((MainActivity) getActivity()).getLastKnownLocation();
+        final DeviceLocationData deviceLocationData = ((MapActivity) getActivity()).getLastKnownLocation();
         Action action = new Action() {
             @Override
             public void action(ArrayList<Place> places, String error) {

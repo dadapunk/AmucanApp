@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.amucan.amucan.Adapters.CategoryAdapter;
-import com.amucan.amucan.Activities.MainActivity;
+import com.amucan.amucan.Activities.MapActivity;
 import com.amucan.amucan.Models.DeviceLocationData;
 import com.amucan.amucan.Utils.Development.AppToast;
 import com.amucan.amucan.Utils.MapUtils.PoiCategoryFilter.OsmTag;
@@ -79,9 +79,9 @@ public class CategoriesFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 try {
-                    ((MainActivity) getActivity()).showLoadingScreen();
+                    ((MapActivity) getActivity()).showLoadingScreen();
                     int categoryId = (Integer) view.getTag();
-                    openCategory(position, ((MainActivity) getActivity()).getLastKnownLocation(),categoryId);
+                    openCategory(position, ((MapActivity) getActivity()).getLastKnownLocation(),categoryId);
                     poiTagsReceived = 0;// reset the number
                 } catch (IOException e) {
                     Log.e(TAG, "Error opening category");
@@ -114,7 +114,7 @@ public class CategoriesFragment extends Fragment {
 
             } else
                 new AppToast(getActivity()).centerViewToast(getString(R.string.enable_gps_to_continue));
-            ((MainActivity) getActivity()).hideLoadingScreenWithNavigation();
+            ((MapActivity) getActivity()).hideLoadingScreenWithNavigation();
             return;
         }
         final List<Element> poiElements = new ArrayList<>();
@@ -133,7 +133,7 @@ public class CategoriesFragment extends Fragment {
                         new AppToast(getActivity()).longToast(getString(R.string.no_pois_near_user_location));
                     } catch (Exception e) {
                     }
-                    ((MainActivity) getActivity()).hideLoadingScreenWithNavigation();
+                    ((MapActivity) getActivity()).hideLoadingScreenWithNavigation();
                 }
             }
 
@@ -147,7 +147,7 @@ public class CategoriesFragment extends Fragment {
                         displayPOIs(categoryDisplayConfig, poiElements);
                     else if (poiTagsReceived == FilterCategory.getFilters(categoyId).size() && poiElements.size() == 0) {
                         new AppToast(getActivity()).toast(getString(R.string.no_pois_near_user_location));
-                        ((MainActivity) getActivity()).hideLoadingScreenWithNavigation();
+                        ((MapActivity) getActivity()).hideLoadingScreenWithNavigation();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -170,7 +170,7 @@ public class CategoriesFragment extends Fragment {
      */
     private void displayPOIs(CategoryDisplayConfig displayConfig, List<Element> elements) {
         try {
-            ((MainActivity) getActivity()).openCategoryList(displayConfig, elements);
+            ((MapActivity) getActivity()).openCategoryList(displayConfig, elements);
         } catch (Exception e) {
             e.printStackTrace();
         }
