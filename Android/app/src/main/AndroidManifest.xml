@@ -21,9 +21,7 @@
             <action android:name="android.location.PROVIDERS_CHANGED" />
             </intent-filter>
             </receiver>
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+
         <activity
             android:name="com.amucan.amucan.Activities.MainActivity"
             android:theme="@style/AppTheme.LoginRegister"
